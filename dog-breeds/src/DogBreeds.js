@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 
 const fetchBreeds = async () => {
-  const { data } = await axios.get("https://dogapi.dog/api/v2/breeds");
+  const response = await fetch("https://dogapi.dog/api/v2/breeds");
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  const data = await response.json();
   return data;
 };
 
